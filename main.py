@@ -69,9 +69,14 @@ marker_10=map_widget.set_marker(54.109158, 18.781509,
                                 text="Schronisko OTOZ Animals w Tczewie",
                                 marker_color_circle='#8f1318',
                                 marker_color_outside='#EA0B15')
-str1=''
 def submit():
-    str1=prob.get()
+    # get text from "prob" CTkEntry object
+    prob_text = prob.get()
+    # set nice display text for the new marker by joining "Problem: " with prob_text
+    marker_text = "Problem: " + prob_text
+    # set marker_text as a display text for the new_marker marker
+    # we can reference new_marker variable here, because new_marker variable was declaerd as global in add_marker_event() function
+    new_marker.set_text(marker_text)
 #funkcja dodawania pinezek
 def add_marker_event(coords):
     global new_marker
@@ -81,7 +86,7 @@ def add_marker_event(coords):
 
     new_marker = map_widget.set_marker(coords[0],
                                        coords[1],
-                                       text='nowa pinezka'.center(10))
+                                       text=''.center(10))
 
     zwierz.place(relx=0.5, rely=0.17, anchor='n')
 
@@ -89,6 +94,15 @@ def add_marker_event(coords):
 map_widget.add_right_click_menu_command(label="Dodaj pinezkę",
                                         command=add_marker_event,
                                         pass_coords=True)
+def submit():
+    # get text from "prob" CTkEntry object
+    prob_text = prob.get()
+    zwierz_text=zwierz.get()
+    # set nice display text for the new marker by joining "Problem: " with prob_text
+    marker_text = "Problem: " + prob_text + '\n Zwierzę: ' + zwierz_text
+    # set marker_text as a display text for the new_marker marker
+    # we can reference new_marker variable here, because new_marker variable was declaerd as global in add_marker_event() function
+    new_marker.set_text(marker_text)
 
 
 #entry frame help info
